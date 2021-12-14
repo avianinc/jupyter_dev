@@ -28,7 +28,7 @@ RUN pip install elyra jupyterlab-scheduler jupyterlab-interactive-dashboard-edit
     openmdao[all] jupyter-contrib-core jupyter-contrib-nbextensions
 
 RUN jupyter labextension install @j123npm/qgrid2@1.1.4
-# RUN pip install "nbconvert==6.0.1"
+RUN pip install "nbconvert==6.0.1"
 RUN jupyter lab build
 
 ##
