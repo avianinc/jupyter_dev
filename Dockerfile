@@ -4,8 +4,7 @@
 # jdehart@avian.com
 ##############################
 
-# FROM continuumio/mambaforge
-FROM python:3.9-alpine
+# FROM continuumio/miniconda3
 
 ## Must add `DEBIAN_FRONTEND=noninteractive` to prevent any os waiting for user input situations
   ## see --> https://askubuntu.com/questions/909277/avoiding-user-interaction-with-tzdata-when-installing-certbot-in-a-docker-contai
