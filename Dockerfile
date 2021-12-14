@@ -4,7 +4,8 @@
 # jdehart@avian.com
 ##############################
 
-FROM continuumio/miniconda3
+#FROM continuumio/miniconda3
+FROM condaforge/mambaforge
 
 ## Must add `DEBIAN_FRONTEND=noninteractive` to prevent any os waiting for user input situations
   ## see --> https://askubuntu.com/questions/909277/avoiding-user-interaction-with-tzdata-when-installing-certbot-in-a-docker-contai
@@ -19,7 +20,7 @@ RUN apt-get clean
 RUN rm -rf /var/lib/apt/lists/*
 
 ## Build the jupyter lab environment
-RUN conda install -c conda-forge -y git nodejs \
+RUN mamba install -c conda-forge -y git nodejs \
     sos sos-notebook jupyterlab-sos sos-papermill sos-r sos-python sos-bash \
     jupyter-sysml-kernel jupyterlab-git jupyter_kernel_gateway
 
