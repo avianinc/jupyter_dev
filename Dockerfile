@@ -1,5 +1,6 @@
 
-# Builds a desktop version of jupyter lab for MBSE experimentation with sysmlv2
+# Builds a desktop version of jupyter lab for MBSE experimentation with sysmlv2 with noVNC+xrdp
+# Added Gonme desktop for fun stuff
 # J.K DeHart
 # jdehart@avian.com
 ##############################
@@ -15,6 +16,11 @@ ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get --quiet --yes update
 RUN apt-get -y upgrade
 
+# EPOSE 3389 for xrdp
+# or ubuntu-desktop
+RUN apt-get install -y --no-install-recommends gnome-desktop xrdp snapd
+RUN snap install novnc
+
 ## Clean up a bit to keep the image small
 RUN apt-get clean
 RUN rm -rf /var/lib/apt/lists/*
@@ -23,13 +29,9 @@ RUN rm -rf /var/lib/apt/lists/*
 ## Build the jupyter lab environment
 RUN mamba install -c conda-forge -y git nodejs \
     sos sos-notebook jupyterlab-sos sos-papermill sos-r sos-python sos-bash \
-    jupyter-sysml-kernel jupyterlab-git jupyter_kernel_gateway
+    jupyter-sysml-kernel jupyterlab-git
 
-RUN pip install elyra jupyterlab-scheduler jupyterlab-interactive-dashboard-editor \
-    openmdao[all] jupyter-contrib-core jupyter-contrib-nbextensions jupyterlab-novnc
-
-RUN jupyter labextension install @j123npm/qgrid2@1.1.4
-RUN pip install "nbconvert==6.0.1"
+RUN pip install jupyterlab-novnc
 RUN jupyter lab build
 
 ##
@@ -75,6 +77,7 @@ RUN cd /home/ubuntu
 
 # Setup Jupyterlab server and run
 EXPOSE 8888
+EXPOSE 3389
 
 CMD ["jupyter", "lab", "--ip='*'", "--port=8888", "--no-browser", "--allow-root"]
 
