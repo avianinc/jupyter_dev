@@ -14,10 +14,12 @@ ARG DEBIAN_FRONTEND=noninteractive
 ## Update server
 RUN apt-get --quiet --yes update
 RUN apt-get -y upgrade     
+RUN tasksel install desktop gnome-desktop
 
 ## Clean up a bit to keep the image small
 RUN apt-get clean
 RUN rm -rf /var/lib/apt/lists/*
+
 
 ## Build the jupyter lab environment
 RUN mamba install -c conda-forge -y git nodejs \
@@ -25,7 +27,7 @@ RUN mamba install -c conda-forge -y git nodejs \
     jupyter-sysml-kernel jupyterlab-git jupyter_kernel_gateway
 
 RUN pip install elyra jupyterlab-scheduler jupyterlab-interactive-dashboard-editor \
-    openmdao[all] jupyter-contrib-core jupyter-contrib-nbextensions
+    openmdao[all] jupyter-contrib-core jupyter-contrib-nbextensions jupyterlab-novnc
 
 RUN jupyter labextension install @j123npm/qgrid2@1.1.4
 RUN pip install "nbconvert==6.0.1"
