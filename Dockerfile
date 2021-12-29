@@ -15,6 +15,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get --quiet --yes update
 RUN apt-get -y upgrade     
 RUN tasksel install desktop gnome-desktop
+RUN apt install scilab octave -y
 
 ## Clean up a bit to keep the image small
 RUN apt-get clean
