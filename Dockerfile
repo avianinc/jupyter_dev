@@ -15,9 +15,6 @@ ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get --quiet --yes update
 RUN apt-get -y upgrade
 
-RUN apt-get install -y --no-install-recommends ubuntu-desktop xrdp
-RUN apt-get install scilab octave -y
-
 ## Clean up a bit to keep the image small
 RUN apt-get clean
 RUN rm -rf /var/lib/apt/lists/*
@@ -78,6 +75,7 @@ RUN cd /home/ubuntu
 
 # Setup Jupyterlab server and run
 EXPOSE 8888
+
 CMD ["jupyter", "lab", "--ip='*'", "--port=8888", "--no-browser", "--allow-root"]
 
 # Used for trouble shooting
