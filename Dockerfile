@@ -16,7 +16,7 @@ RUN apt-get --quiet --yes update
 RUN apt-get -y upgrade     
 
 FROM ubuntu
-RUN apt-get install UBUNTU-gnome-desktop -y
+RUN apt-get install ubunbu-gnome-desktop -y
 RUN apt install scilab octave -y
 
 ## Clean up a bit to keep the image small
