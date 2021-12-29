@@ -15,9 +15,8 @@ ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get --quiet --yes update
 RUN apt-get -y upgrade     
 
-FROM ubuntu
 RUN apt-get install ubunbu-gnome-desktop -y
-RUN apt install scilab octave -y
+RUN apt-get install scilab octave -y
 
 ## Clean up a bit to keep the image small
 RUN apt-get clean
