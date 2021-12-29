@@ -14,7 +14,9 @@ ARG DEBIAN_FRONTEND=noninteractive
 ## Update server
 RUN apt-get --quiet --yes update
 RUN apt-get -y upgrade     
-RUN apt-get install task-gnome-desktop -y
+
+FROM ubuntu
+RUN apt-get install UBUNTU-gnome-desktop -y
 RUN apt install scilab octave -y
 
 ## Clean up a bit to keep the image small
